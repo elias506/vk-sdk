@@ -1,7 +1,8 @@
 # VK-SDK
 [![Go Report Card](https://goreportcard.com/badge/github.com/elias506/vk-sdk)](https://goreportcard.com/report/github.com/elias506/vk-sdk)
+[![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/elias506/vk-sdk)](https://img.shields.io/github/v/tag/elias506/vk-sdk)
+[![Contributors](https://img.shields.io/github/contributors-anon/elias506/vk-sdk)](https://img.shields.io/github/contributors-anon/elias506/vk-sdk)
 [![Go Reference](https://pkg.go.dev/badge/github.com/elias506/vk-sdk.svg)](https://pkg.go.dev/github.com/elias506/vk-sdk)
-[![Gen Coverage](https://img.shields.io/badge/gen%20coverage-98.2%25-blue)](https://img.shields.io/badge/gen%20coverage-98.2%25-blue)
 [![License](https://img.shields.io/github/license/elias506/vk-sdk)](https://img.shields.io/github/license/elias506/vk-sdk)
 
 Package vk-sdk provides a **full generated** development kit to work 
