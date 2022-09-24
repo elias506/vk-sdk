@@ -83,6 +83,13 @@ For example:
 //  IsGlobal: true
 Error_Request ErrorCode = 8
 ```
+- Generated access permissions with specification.
+For example:
+````go
+// UserPermissionWall Access to standard and advanced methods for the wall.
+// Note that this access permission is unavailable for sites (it is ignored at attempt of authorization).
+UserPermissionWall AccessPermission = 1 << 13
+````
 - Method descriptions contains 
 Schema specification, token types, additional error code links, and `dev.vk.com` method link.
 For example:
@@ -104,6 +111,9 @@ func (vk *VK) Docs_Delete(ctx context.Context, req Docs_Delete_Request, options 
 	return
 }
 ```
+- Every method contains implies presence context for internal client
+and additional method option like response language, on/off application test mode
+and captcha parameters.
 - Enums generate extended name/value from vk-api-shcema.
 For example:
 ```go
@@ -118,9 +128,6 @@ const (
 )
 ```
 Here constant named `PerClicks` contains int value `0` and so on.
--  Every method contains implies presence context for internal client 
-and additional method option like response language, on/off application test mode 
-and captcha parameters.
 - Using [easyjson](https://github.com/mailru/easyjson) to work with api requests/responses 
 - There is up-to-date generated `vk-api` version
 
