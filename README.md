@@ -31,48 +31,98 @@ Look for full in `vk-sdk/example/example.go`:
 
 **Get friends in online:**
 ```go
-    // Get new client instants
-    vk := vk_sdk.NewVK(http.DefaultClient)
-    
-    // Set your token
-    vk.SetToken(<your_token>) 
-    
-    // Get your online friend IDs
-    req := vk_sdk.Friends_GetOnline_Request{}
-    
-    resp, apiErr, err := vk.Friends_GetOnline(context.Background(), req, vk_sdk.TestMode())
+// Get new client instants with provided token
+vk := vk_sdk.NewVK(http.DefaultClient, "<your_token>")
 
-    if err != nil || apiErr != nil {
-        log.Fatal()
-    }
+// Get your online friend IDs
+req := vk_sdk.Friends_GetOnline_Request{}
 
-    fmt.Println("Online friends IDs:", resp.Response) 
+resp, apiErr, err := vk.Friends_GetOnline(context.Background(), req, vk_sdk.TestMode())
+
+if err != nil || apiErr != nil {
+    log.Fatal()
+}
+
+fmt.Println("Online friends IDs:", resp.Response) 
 ```
 
 **Use Implicit/AuthCode flows to auth:**
 ```go
-    // Build auth request
-    authReq := vk_sdk.ImplicitFlowUserRequest{
-        ClientID:    "<your_id>", 
-        //RedirectURI: "",
-        //Display:     nil,
-        //Scope:       nil,
-        //State:       nil,
-        //Revoke:      false,
-    }
+// Build auth request
+authReq := vk_sdk.ImplicitFlowUserRequest{
+    ClientID:    "<your_id>", 
+    //RedirectURI: "",
+    //Display:     nil,
+    //Scope:       nil,
+    //State:       nil,
+    //Revoke:      false,
+}
 
-    // get redirect url for user
-    redirectURL := vk_sdk.GetAuthRedirectURL(authReq)
-    
-    // wait user redirect... 
-    
-    // get token from redirect url 
-    token, oAuthErr, err := vk_sdk.GetImplicitFlowUserToken(<user_url>)
+// get redirect url for user
+redirectURL := vk_sdk.GetAuthRedirectURL(authReq)
 
-    if err != nil || apiErr != nil {
-        log.Fatal()
-    }
+// wait user redirect... 
+
+// get token from redirect url 
+token, oAuthErr, err := vk_sdk.GetImplicitFlowUserToken(<user_url>)
+
+if err != nil || apiErr != nil {
+    log.Fatal()
+}
 ```
+
+## Features
+- `LimitClient` is `http.Client` implementation to do requests 
+with provided frequency 
+- Generated error codes with description, possible solution and links to subcodes.
+For example:
+```go
+// Error_Request Invalid request.
+// May contain one of the listed subcodes: [ UserReachedLinkedAccountsLimit, ServiceUuidLinkWithAnotherUser ].
+// Solution: Check the request syntax (https://vk.com/dev/api_requests) and used parameters list (it can be found on a method description page).
+//  IsGlobal: true
+Error_Request ErrorCode = 8
+```
+- Method descriptions contains 
+Schema specification, token types, additional error code links, and `dev.vk.com` method link.
+For example:
+```go
+// Docs_Delete Deletes a user or community document.
+// May execute with listed access token types:
+//    [ user ]
+// When executing method, may return one of global or with listed codes API errors:
+//    [ Error_ParamDocDeleteAccess, Error_ParamDocId ]
+//
+// https://dev.vk.com/method/docs.delete
+func (vk *VK) Docs_Delete(ctx context.Context, req Docs_Delete_Request, options ...Option) (resp Base_Ok_Response, apiErr ApiError, err error) {
+	values := make(url.Values, 4+len(options))
+	if err = req.fillIn(values); err != nil {
+		return
+	}
+	setOptions(values, options)
+	apiErr, err = vk.doReq("docs.delete", ctx, values, &resp)
+	return
+}
+```
+- Enums generate extended name/value from vk-api-shcema.
+For example:
+```go
+// Ads_AdCostType Cost type
+type Ads_AdCostType int
+
+const (
+    Ads_AdCostType_PerClicks               Ads_AdCostType = 0
+    Ads_AdCostType_PerImpressions          Ads_AdCostType = 1
+    Ads_AdCostType_PerActions              Ads_AdCostType = 2
+    Ads_AdCostType_PerImpressionsOptimized Ads_AdCostType = 3
+)
+```
+Here constant named `PerClicks` contains int value `0` and so on.
+-  Every method contains implies presence context for internal client 
+and additional method option like response language, on/off application test mode 
+and captcha parameters.
+- Using [easyjson](https://github.com/mailru/easyjson) to work with api requests/responses 
+- There is up-to-date generated `vk-api` version
 
 ## Main idea
 `vk-sdk` aims to be user-friendly due to the completeness of the generated code 
