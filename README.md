@@ -18,7 +18,7 @@ is easy to maintain and can be comfortably used by consumers because of its comp
 We are welcome to new participants of the project. Feel free to create a 
 [bug](https://github.com/elias506/vk-sdk/issues/new?assignees=elias506&labels=bug&template=bug_report.md&title=) 
 or [enhancement](https://github.com/elias506/vk-sdk/issues/new?assignees=elias506&labels=enhancement&template=feature_request.md&title=) 
-issue and new [pull request](https://github.com/elias506/vk-sdk/pulls)
+issue and new [pull request](https://github.com/elias506/vk-sdk/pulls).
 
 ## Get started
 ### Install:
@@ -66,7 +66,7 @@ redirectURL := vk_sdk.GetAuthRedirectURL(authReq)
 // get token from redirect url 
 token, oAuthErr, err := vk_sdk.GetImplicitFlowUserToken(<user_url>)
 
-if err != nil || apiErr != nil {
+if err != nil || oAuthErr != nil {
     log.Fatal()
 }
 ```
