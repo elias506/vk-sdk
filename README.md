@@ -1,6 +1,7 @@
 # VK-SDK
 [![Go Report Card](https://goreportcard.com/badge/github.com/elias506/vk-sdk)](https://goreportcard.com/report/github.com/elias506/vk-sdk)
 ![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/elias506/vk-sdk?display_name=tag&include_prereleases)
+![Lines of code](https://img.shields.io/tokei/lines/github/elias506/vk-sdk)
 [![Contributors](https://img.shields.io/github/contributors/elias506/vk-sdk)](https://img.shields.io/github/contributors-anon/elias506/vk-sdk)
 [![Go Reference](https://pkg.go.dev/badge/github.com/elias506/vk-sdk.svg)](https://pkg.go.dev/github.com/elias506/vk-sdk)
 [![License](https://img.shields.io/github/license/elias506/vk-sdk)](https://img.shields.io/github/license/elias506/vk-sdk)
