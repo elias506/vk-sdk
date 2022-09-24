@@ -99,40 +99,6 @@ func editEnumSpace(s string) string {
 	s = strings.ReplaceAll(s, "-", "")
 	s = strings.ReplaceAll(s, "&", "And")
 
-	//bytes := []byte(s)
-
-	//for i, b := range bytes {
-	//	if string(b) == " " {
-	//		bytes[i] = []byte("_")[0]
-	//		continue
-	//	}
-	//
-	//	if string(b) == "," {
-	//		bytes = append(bytes[:i], bytes[i+1:]...)
-	//		bytes[i] = []byte("_")[0]
-	//		continue
-	//	}
-	//
-	//	if string(b) == "-" {
-	//		bytes = append(bytes[:i], bytes[i+1:]...)
-	//		continue
-	//	}
-	//
-	//	if string(b) == "&" {
-	//		newBytes := make([]byte, len(bytes))
-	//		copy(newBytes, bytes)
-	//
-	//		newBytes = append(newBytes[:i], []byte("And")...)
-	//		//k := append(newBytes[:i], []byte("And")...)
-	//		//fmt.Println(string(k))
-	//		//k2 := append(append(bytes[:i], []byte("And")...), bytes[i+1:]...)
-	//		//fmt.Println(string(k2))
-	//		//bytes = k2
-	//		bytes = append(newBytes, bytes[i+1:]...)
-	//		continue
-	//	}
-	//}
-
 	return s
 }
 

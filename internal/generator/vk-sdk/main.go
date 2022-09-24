@@ -42,7 +42,7 @@ func goFmt(path string) {
 		return
 	}
 
-	cmd := exec.Command("go", "fmt" /*"-w",*/, path)
+	cmd := exec.Command("go", "fmt", path)
 
 	err := cmd.Run()
 
@@ -90,6 +90,7 @@ func genVersion(file string) {
 
 func genObjects(file, testFile string) {
 	defer goFmt(file)
+	defer goFmt(testFile)
 
 	o, err := os.Create(file)
 	if err != nil {
@@ -108,6 +109,7 @@ func genObjects(file, testFile string) {
 
 func genResponses(file, testFile string) {
 	defer goFmt(file)
+	defer goFmt(testFile)
 
 	o, err := os.Create(file)
 	if err != nil {
@@ -126,6 +128,7 @@ func genResponses(file, testFile string) {
 
 func genMethods(file, testFile string) {
 	defer goFmt(file)
+	defer goFmt(testFile)
 
 	m, err := os.Create(file)
 	if err != nil {

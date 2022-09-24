@@ -105,7 +105,7 @@ func (vk *VK) buildRequest(methodName string, ctx context.Context, values url.Va
 		Path:   apiPath + "/" + methodName,
 	}
 
-	req, err := http.NewRequestWithContext(ctx, "POST", reqURL.String(), reqBody)
+	req, err := http.NewRequestWithContext(ctx, http.MethodPost, reqURL.String(), reqBody)
 
 	if err != nil {
 		return nil, err
